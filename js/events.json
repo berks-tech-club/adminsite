@@ -1,0 +1,16 @@
+{
+    "events": [
+        {
+            "title" : "Google Speaker",
+            "description" : "google description",
+            "picture" : "images/speaker.jpg",
+            "moreinfo" : "more info about speaker"
+        },
+        {
+            "title" : "Video Game Tounrament",
+            "description" : "game description",
+            "picture" : "images/vgames.jpg",
+            "moreinfo" : "more info about video games"
+        }
+    ]
+}

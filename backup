@@ -1,0 +1,109 @@
+icon ratio - 1/4.25
+
+<div class="card large">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="images/discord.jpg">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">Discord<i class="material-icons right">more_vert</i></span>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Discord<i class="material-icons right">close</i></span>
+      <p>We use discord to discuss various topics regarding technology, in addition to projects we're working on and things going on around campus</p>
+      <div class="card-action">
+          <a href="https://discord.gg/8TgwGmx" target="_blank">Join our Discord</a>
+        </div>
+    </div>
+  </div>
+
+<div class="card large">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="images/gmail.jpg">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">Email<i class="material-icons right">more_vert</i></span>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Email<i class="material-icons right">close</i></span>
+      <p>Shoot us an email if you have want to talk to our leadership. We're always looking for volunteer opportunities and speakers.</p>
+      <div class="card-action">
+          <a href="#" target="_blank">Email us</a>
+        </div>
+    </div>
+  </div>
+
+  <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="images/gmail.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">Email<i class="material-icons right">more_vert</i></span>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Email<i class="material-icons right">close</i></span>
+              <p>Shoot us an email if you have want to talk to our leadership. We're always looking for volunteer opportunities and speakers.</p>
+      <div class="card-action">
+          <a href="#" target="_blank">Email us</a>
+        </div>
+            </div>
+          </div>
+
+<div class="card large">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="images/github.png">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">Github<i class="material-icons right">more_vert</i></span>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Github<i class="material-icons right">close</i></span>
+      <p>We host code for projects we're working on using github. We created an organization that club members can join to make collaborating easier.</p>
+      <div class="card-action">
+          <a href="https://github.com/berks-tech-club" target="_blank">Checkout our Organization</a>
+        </div>
+    </div>
+  </div>
+
+
+
+
+  .z-depth-0 {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+/* 2dp elevation modified*/
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-small, .btn-floating, .dropdown-content, .collapsible, .sidenav {
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.z-depth-1-half, .btn:hover, .btn-large:hover, .btn-small:hover, .btn-floating:hover {
+  -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+}
+
+/* 6dp elevation modified*/
+.z-depth-2 {
+  -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+}
+
+/* 12dp elevation modified*/
+.z-depth-3 {
+  -webkit-box-shadow: 0 8px 17px 2px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 8px 17px 2px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+}
+
+/* 16dp elevation */
+.z-depth-4 {
+  -webkit-box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -7px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -7px rgba(0, 0, 0, 0.2);
+}
+
+/* 24dp elevation */
+.z-depth-5, .modal {
+  -webkit-box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
+}
+  
