@@ -30,6 +30,10 @@ p .light{
   background-color: #AAB1BF !important;
 }
 
+.pgrey-opaque{
+  background-color: rgba(170,177,191, .5) !important;
+}
+
 .pwhite {
   background-color: #F2F2F2 !important;
 }
@@ -8396,7 +8400,7 @@ input[type=range]::-ms-thumb {
 }
 
 .slider .indicators .indicator-item.active {
-  background-color: #4CAF50;
+  background-color: #192E59;
 }
 
 .carousel {
