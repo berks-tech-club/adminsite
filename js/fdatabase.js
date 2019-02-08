@@ -1,6 +1,6 @@
 // Initialize Firebase
   // TODO: Replace with your project's customized code snippet
-  var config = {
+  /*var config = {
     apiKey: "AIzaSyAEK_96bgDM3yzOx2opdd3TQOrIyK0xv08",
     authDomain: "berks-technology-club-dev.firebaseapp.com",
     databaseURL: "https://berks-technology-club-dev.firebaseio.com/",
@@ -17,3 +17,4 @@
       moreInfo: moreInfo
     });
   }
+  */

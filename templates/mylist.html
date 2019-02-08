@@ -1,0 +1,174 @@
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130568140-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-130568140-1');
+    </script>
+
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Giftamizer</title>
+  <link rel="icon" href="/icon.png">
+
+<!-- CSS  -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+	<link rel="stylesheet" href="../help.css">
+	<script>
+  $(document).ready(function() {
+	$('.modal').modal();
+	$(".button-collapse").sideNav();
+  	$('#circleWave').hide();
+    $('#circlInner').hide();
+    $('#helpContainer').hide();
+  });
+  var out = false;
+  function helpToggle(){
+  	if(out==false){
+  		$('#circlInner').show();
+  		$('#circleWave').show();
+  		$('#helpContainer').show();
+  		$('#circleOuter').animate({height: '700px', width: '700px'});
+  		out = true;
+  	} else {
+		$( "#circleOuter" ).animate({height: '0px', width: '0px'}, 700, function() {
+		    $('#circlInner').hide();
+  			$('#circleWave').hide();
+  			$('#helpContainer').hide();
+		});
+  		out = false;
+  	}
+  	
+  }
+	</script>
+	<style>
+	    .material-icons {
+          vertical-align: middle !important;
+          padding-bottom: 3px;
+        }
+	</style>
+  </head>
+<body>
+<div id="helpContainer" onclick="helpToggle();">
+	<div id="circleOuter" class="circle">
+		<div id="circleWave" class="circle"></div>
+		<div id="circleContent">
+		  <h5>Help</h5>
+	      <p>Here you can add items to your list.</p>
+	    </div>
+		<div id="circlInner" class="circle"></div>
+	</div>
+</div>
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="/gift" class="black-text brand-logo">Giftamizer</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a class="black-text" onclick="helpToggle();">Help</a></li>
+        <li><a class="black-text" href="../contribute">Contribute</a></li>
+        <li><a class="black-text" href="../shopping_list">My Shopping List</a></li>
+        <li><a class="black-text" href="../settings">Settings</a></li>
+		<li><a class="black-text" id="btnLogout">Sign Out</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a class="black-text" onclick="$('.button-collapse').sideNav('hide');helpToggle();">Help</a></li>
+        <li><a class="black-text" href="../contribute">Contribute</a></li>
+        <li><a class="black-text" href="../shopping_list">My Shopping List</a></li>
+        <li><a class="black-text" href="../settings">Settings</a></li>
+		<li><a class="black-text" id="btnLogoutMobile">Sign Out</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="black-text button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <h1 class="header center">My List</h1>
+    </div>
+  </div>
+
+<script src="mylist.js"></script>
+  <div class="container">
+    <div id="item_cards" class="row">
+        <!-- ITEM CARDS -->
+    </div>
+  </div>
+  
+  <div class="fixed-action-btn horizontal">
+    <a href="#addItem" class="btn-floating btn-large waves-effect waves-light red modal-trigger tooltipped" data-position="left" data-delay="50" data-tooltip="Add Items">
+      <i class="large material-icons">add</i>
+    </a>
+  </div>
+
+  <!-- Add Item -->
+  <div id="addItem" class="modal bottom-sheet">
+    <div class="modal-content">
+	  <h4>Add Item</h4>
+      <div class="row">
+        <div class="input-field col s12 m6 l6">
+          <input id="addItemName" type="text" class="validate">
+          <label for="addItemName">Name</label>
+        </div>
+        <div class="input-field col s12 m6 l6">
+          <input id="addItemLink" type="text" class="validate">
+          <label for="addItemLink">Link</label>
+        </div>
+		<div class="input-field col s12 m12 l12">
+          <input id="addItemDescription" type="text" class="validate">
+          <label for="addItemDescription">Description</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-light btn grey lighten-1"><i class="material-icons right">cancel</i>Cancel</a>
+      <a onclick="addItem();" class="waves-effect waves-light btn green"><i class="material-icons right">save</i>Add</a>
+    </div>
+  </div>
+  <!-- Edit Item -->
+  <div id="editItem" class="modal bottom-sheet">
+    <div class="modal-content">
+	  <h4>Edit Item</h4>
+      <div class="row">
+        <div class="input-field col s12 m6 l6">
+          <input id="editItemName" type="text" class="validate">
+          <label for="editItemName">Name</label>
+        </div>
+        <div class="input-field col s12 m6 l6">
+          <input id="editItemLink" type="text" class="validate">
+          <label for="editItemLink">Link</label>
+        </div>
+		<div class="input-field col s12 m12 l12">
+          <input id="editItemDescription" type="text" class="validate">
+          <label for="editItemDescription">Description</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-light btn grey lighten-1"><i class="material-icons right">cancel</i>Cancel</a>
+      <a id="editItemConfirmBtn" class="waves-effect waves-light btn green"><i class="material-icons right">edit</i>edit</a>
+    </div>
+  </div>
+  <!-- Remove from Group -->
+  <div id="deleteItem" class="modal bottom-sheet">
+    <div class="modal-content">
+	  <h4 id="deleteItemConfirmName">Remove from Group?</h4>
+	  <p id="deleteItemConfirmDesc">A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-light btn grey lighten-1"><i class="material-icons right">cancel</i>Cancel</a>
+      <a id="deleteItemConfirmBtn" class="waves-effect waves-light btn red"><i class="material-icons right">delete</i>Delete</a>
+    </div>
+  </div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script src="https://giftamizer.com/js/announcement.js"></script>
+  </body>
+</html>
+

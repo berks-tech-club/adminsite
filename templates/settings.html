@@ -1,0 +1,214 @@
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130568140-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-130568140-1');
+    </script>
+
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Giftamizer</title>
+  <link rel="icon" href="/icon.png">
+
+<!-- CSS  -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    
+    <script src="../colors/color.js"></script>
+	<link rel="stylesheet" href="../help.css">
+	<script>
+	  $(document).ready(function() {
+		$('select').material_select();
+		$('.modal').modal();
+		$('.tooltipped').tooltip({delay: 50});
+		$(".button-collapse").sideNav();
+		
+		$('#circleWave').hide();
+		$('#circlInner').hide();
+		$('#helpContainer').hide();
+	  });
+
+	  var out = false;
+	  function helpToggle(){
+		if(out==false){
+			$('#circlInner').show();
+			$('#circleWave').show();
+			$('#helpContainer').show();
+			$('#circleOuter').animate({height: '700px', width: '700px'});
+			out = true;
+		} else {
+			$( "#circleOuter" ).animate({height: '0px', width: '0px'}, 700, function() {
+				$('#circlInner').hide();
+				$('#circleWave').hide();
+				$('#helpContainer').hide();
+			});
+			out = false;
+		}
+		
+	  }
+	</script>
+  </head>
+<body>
+<div id="helpContainer" onclick="helpToggle();">
+	<div id="circleOuter" class="circle">
+		<div id="circleWave" class="circle"></div>
+		<div id="circleContent">
+		  <h5>Help</h5>
+	      <p>Here you can create a new group or join a group with an invite code.</p>
+	    </div>
+		<div id="circlInner" class="circle"></div>
+	</div>
+</div>
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="../" class="black-text brand-logo">Giftamizer</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a class="black-text" href="../contribute">Contribute</a></li>
+        <li><a class="black-text" href="../shopping_list">My Shopping List</a></li>
+        <li><a class="black-text">Settings</a></li>
+		<li><a class="black-text" id="btnLogout">Sign Out</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a class="black-text" href="../contribute">Contribute</a></li>
+        <li><a class="black-text" href="../shopping_list">My Shopping List</a></li>
+        <li><a class="black-text">Settings</a></li>
+		<li><a class="black-text" id="btnLogoutMobile">Sign Out</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="black-text button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <div class="row center">
+      <h1 id="UserName" class="header center"></h1>
+      </div>
+    </div>
+  </div>
+
+<script src="settings.js"></script>
+  <div class="container">
+    <div class="row" id="cardGroups">
+	  <div class="col s12">
+		<div id="updateInfo" class="card">
+		  <div class="card-image">
+			<div style="padding-left: 16px; padding-right: 16px; font-size: 1000%; background-color: #fff; color: white;text-align: center;" class="letter"></div>
+		  </div>
+		  <div class="card-stacked">
+			<div class="card-content">
+				<div class="row">
+					<div class="input-field col s12">
+					  <input id="full_name" type="text" class="validate">
+					  <label for="full_name">Full Name</label>
+					</div>
+					<div class="input-field col s12">
+						<select id="userColorBaseEdit" onchange="updateColorShadeSelect()" class="icons">
+						  <option value="" disabled selected>Base Color</option>
+						</select>
+						<label>Base Color</label>
+					</div>
+					<div class="input-field col s12">
+						<select id="userColorShadeEdit" class="icons">
+						  <option value="" selected>Default</option>
+						</select>
+						<label>Color Shade</label>
+					</div>
+					<div class="input-field col s12">
+						<label style="top: -25px;font-size: .8rem;">Text Brightness</label>
+                        <p class="range-field">
+                          <input type="range" id="textBrightness" min="0" max="255" oninput="textBrightnessChange(this.value)" />
+                        </p>
+					</div>
+				</div>
+				<script>
+					$("#full_name").on('keyup', function (e) {
+						if (e.keyCode == 13) {
+							saveUserInfo();
+						}
+					});
+				</script>
+			</div>
+			<div class="card-action">
+			  <a id="saveUserInfoBtn" class="green-text" href="#" onclick="saveUserInfo()">Save</a>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	  <div class="col s12">
+		<div id="changePassword" class="card">
+		  <div class="card-stacked">
+			<div class="card-content">
+              <span class="card-title">Change Password</span>
+				<div class="row">
+					<div class="input-field col s12">
+					  <input id="password" type="password" class="validate">
+					  <label for="password">New Password</label>
+					</div>
+					<div class="input-field col s12">
+					  <input id="passwordConfirm" type="password" class="validate">
+					  <label for="passwordConfirm">New Password Again</label>
+					</div>
+				</div>
+				<script>
+					$("#password, #passwordConfirm").on('keyup', function (e) {
+						if (e.keyCode == 13) {
+							changeUserPass();
+						}
+					});
+				</script>
+			</div>
+			<div class="card-action">
+			  <a id="changeUserPassBtn" class="green-text" href="#changePassword" onclick="changeUserPass()">Change Password</a>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	  <div class="col s12">
+		<div id="changePassword" class="card">
+		  <div class="card-stacked">
+			<div class="card-content">
+              <span class="card-title">Change Email</span>
+				<div class="row">
+					<div class="input-field col s12">
+					  <input id="currentEmail" type="email" class="validate">
+					  <label for="currentEmail">Current Email</label>
+					</div>
+					<div class="input-field col s12">
+					  <input id="newEmail" type="email" class="validate">
+					  <label for="newEmail">New Email</label>
+					</div>
+					<div class="input-field col s12">
+					  <input id="passwordConfirmEmail" type="password" class="validate">
+					  <label for="passwordConfirmEmail">Password</label>
+					</div>
+				</div>
+				<script>
+					$("#currentEmail, #newEmail, #passwordConfirmEmail").on('keyup', function (e) {
+						if (e.keyCode == 13) {
+							changeUserEmail()
+						}
+					});
+				</script>
+			</div>
+			<div class="card-action">
+			  <a id="changeUserPassBtn" class="green-text" href="#changePassword" onclick="changeUserEmail()">Change Email</a>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </div>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script src="https://giftamizer.com/js/announcement.js"></script>
+  </body>
+</html>
