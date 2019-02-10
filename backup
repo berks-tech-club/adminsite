@@ -1,3 +1,55 @@
+  db.collection("events")
+    .get()
+    .then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        var name = doc.data().name;
+        var desc = doc.data().desc;
+        var imageUrl = doc.data().imageUrl;
+        var eventID = doc.id;
+
+        // @TODO update this
+        document.getElementById('event_cards_mobile').innerHTML += '\
+        <div class="card medium horizontal pwhite">\
+                  <div class="card-image">\
+                     <img src="'+imageUrl+'">\
+                  </div>\
+                  <div class="card-stacked">\
+                     <div class="card-content">\
+                        <h2 class="header">'+name+'</h2>\
+                     </div>\
+                     <div class="card-action pwhite">\
+                        <ul class="collapsible">\
+                           <li>\
+                              <div class="collapsible-header"><i class="material-icons pblue-text">gamepad</i>More Info</div>\
+                              <div class="collapsible-body"><span>'+desc+'</span></div>\
+                           </li>\
+                        </ul>\
+                     </div>\
+                  </div>\
+               </div>\
+        '
+
+    // desktop
+    document.getElementById('event_cards_desktop').innerHTML += '\
+    <div class="card medium horizontal pwhite" id="devent_'+eventID+'">\
+      <div class="card-image">\
+        <img src="'+imageUrl+'">\
+      </div>\
+      <div class="card-stacked">\
+        <div class="card-content">\
+            <h2 class="header">'+name+'</h2>\
+            <p>'+desc+'</p>\
+        </div>\
+        <div class="card-action blue-text">\
+        <a class="red-text" onclick="deleteEvent(\''+eventID+'\', \''+name+'\', \''+desc+'\');">Delete</a>\
+        <a class="green-text" onclick="editEvent(\''+eventID+'\', \''+name+'\', \''+desc+'\', \''+imageUrl+'\');">Edit</a>\
+      </div>\
+      </div>\
+  </div>\
+        '
+      });
+    })
+
 icon ratio - 1/4.25
 
 <div class="card large">
