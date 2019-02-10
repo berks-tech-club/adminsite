@@ -163,11 +163,34 @@ function editEventFinal(eventID) {
       '
 }
 
+// firebase storage tutorial
+// https://medium.com/@mheavers/setting-up-a-basic-file-upload-feature-for-your-static-website-with-just-javascript-using-firebase-32464580d8bb
+document.querySelector('.file-select).addEventListener(\'change\', handleFileUploadChange');
+document.querySelector('.file-submit).addEventListener(\'click\', handleFileUploadSubmit');
+handleFileUploadSubmit(e) {
+  const uploadTask = storageRef.child(`images/${selectedFile.name}`).put(selectedFile); //create a child directory called images, and place the file inside this directory
+  uploadTask.on('state_changed', (snapshot) => {
+  // Observe state change events such as progress, pause, and resume
+  }, (error) => {
+    // Handle unsuccessful uploads
+    console.log(error);
+  }, () => {
+     // Do something once upload is complete
+     console.log('success');
+  });
+}
+
 // add an event to the database
 function addEvent() {
   var name =  symbolFix(document.getElementById('addEventName').value);
   var desc =  symbolFix(document.getElementById('addEventDesc').value);
   var imageUrl =  symbolFix(document.getElementById('addEventImageUrl').value);
+
+  let selectedFile;
+  handleFileUploadChange(e) {
+    selectedFile = e.target.files[0];
+  }
+  
   db.collection("events").add({
     name: name,
     desc: desc,
