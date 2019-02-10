@@ -1,14 +1,16 @@
-// https://www.lynda.com/React-Native-tutorials/React-Navigation-creating-navigator/645061/686606-4.html
-
 var config = {
-    apiKey: "AIzaSyDfiBzLoNU4t5q_hOdcFjg-RGKNFnZ5wxg",
-    authDomain: "berks-technology-club-admin.firebaseapp.com",
-    databaseURL: "https://berks-technology-club-admin.firebaseio.com",
-    projectId: "berks-technology-club-admin",
-    storageBucket: "berks-technology-club-admin.appspot.com",
-    messagingSenderId: "203643757535"
+  apiKey: "AIzaSyDfiBzLoNU4t5q_hOdcFjg-RGKNFnZ5wxg",
+  authDomain: "berks-technology-club-admin.firebaseapp.com",
+  databaseURL: "https://berks-technology-club-admin.firebaseio.com",
+  projectId: "berks-technology-club-admin",
+  storageBucket: "berks-technology-club-admin.appspot.com",
+  messagingSenderId: "203643757535"
 };
 firebase.initializeApp(config);
+
+// https://www.lynda.com/React-Native-tutorials/React-Navigation-creating-navigator/645061/686606-4.html
+
+
 
 // global variable for referencing the database
 var db = firebase.firestore();
@@ -41,7 +43,7 @@ function getEvents() {
                 <a class="green-text" onclick="editEvent(\''+eventID+'\', \''+name+'\', \''+desc+'\', \''+imageUrl+'\');">Edit</a>\
                 </div>\
               </div>\
-          '
+          ';
 
             document.getElementById('event_cards_desktop').innerHTML += '\
             <div class="card medium horizontal pwhite" id="devent_'+eventID+'">\
@@ -59,7 +61,7 @@ function getEvents() {
               </div>\
               </div>\
           </div>\
-                '
+                ';
         }
         if (change.type == "modified") {
           console.log('Event card modified');
@@ -160,14 +162,16 @@ function editEventFinal(eventID) {
     </div>\
     </div>\
 </div>\
-      '
+      ';
+
+  M.toast({html: eventName+' was changed.'}, 4000);
 }
 
 // firebase storage tutorial
 // https://medium.com/@mheavers/setting-up-a-basic-file-upload-feature-for-your-static-website-with-just-javascript-using-firebase-32464580d8bb
-document.querySelector('.file-select).addEventListener(\'change\', handleFileUploadChange');
+/*document.querySelector('.file-select).addEventListener(\'change\', handleFileUploadChange');
 document.querySelector('.file-submit).addEventListener(\'click\', handleFileUploadSubmit');
-handleFileUploadSubmit(e) {
+function handleFileUploadSubmit(e) {
   const uploadTask = storageRef.child(`images/${selectedFile.name}`).put(selectedFile); //create a child directory called images, and place the file inside this directory
   uploadTask.on('state_changed', (snapshot) => {
   // Observe state change events such as progress, pause, and resume
@@ -178,18 +182,13 @@ handleFileUploadSubmit(e) {
      // Do something once upload is complete
      console.log('success');
   });
-}
+}*/
 
 // add an event to the database
 function addEvent() {
   var name =  symbolFix(document.getElementById('addEventName').value);
   var desc =  symbolFix(document.getElementById('addEventDesc').value);
   var imageUrl =  symbolFix(document.getElementById('addEventImageUrl').value);
-
-  let selectedFile;
-  handleFileUploadChange(e) {
-    selectedFile = e.target.files[0];
-  }
   
   db.collection("events").add({
     name: name,
