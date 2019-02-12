@@ -10,11 +10,6 @@ firebase.initializeApp(config);
 
 //var auth = firebase.auth();
 
-$('#btnLogout').click(function(){ 
-    firebase.auth().signOut();
-    window.location.href = "login.html";
-});
-
 firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
       // User is signed in.

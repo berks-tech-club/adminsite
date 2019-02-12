@@ -10,16 +10,6 @@
       <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
       <link rel="icon" href="images/icon.png">
    </head>
-   <script>
-   firebase.auth().onAuthStateChanged(firebaseUser => {
-    if (firebaseUser) {
-      // User is signed in.
-    } else {
-      // User is signed out.
-      window.location.href = "login.html";
-    }
-  });
-   </script>
    <body class="white">
       <!-- Desktop Nav -->
       <nav class="pblue" role="navigation">
@@ -160,8 +150,24 @@
       <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-firestore.js"></script>
       <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-storage.js"></script>
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-      <script src="js/auth.js"></script>
       <script src="js/events.js"></script>
+      <script>
+         firebase.auth().onAuthStateChanged(firebaseUser => {
+          if (firebaseUser) {
+            // User is signed in.
+            console.log('User logged in');
+          } else {
+            // User is signed out.
+            console.log('Not logged in');
+            window.location.href = "login.html";
+          }
+        });
+
+        $('#btnLogout').click(function(){ 
+    firebase.auth().signOut();
+    window.location.href = "login.html";
+});
+         </script>
       <script src="js/center.js"></script>
       <script src="js/materialize.js"></script>
       <script src="js/init.js"></script>
