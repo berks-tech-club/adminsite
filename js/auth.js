@@ -10,8 +10,13 @@ firebase.initializeApp(config);
 
 //var auth = firebase.auth();
 
-firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
+$('#btnLogout').click(function(){ 
+    firebase.auth().signOut();
+    window.location.href = "login.html";
+});
+
+firebase.auth().onAuthStateChanged(firebaseUser => {
+    if (firebaseUser) {
       // User is signed in.
       var displayName = user.displayName;
       var email = user.email;
@@ -21,10 +26,9 @@ firebase.auth().onAuthStateChanged(function(user) {
       var uid = user.uid;
       var providerData = user.providerData;
       window.location.href = "index.html";
-      // ...
     } else {
       // User is signed out.
-      window.location.href = "login.html";
+      //window.location.href = "login.html";
     }
   });
 
@@ -85,21 +89,6 @@ passwordField.addEventListener('keypress', function (e) {
         promise.catch(e => errors(e));
     }
 });
-
-//if logged in
-firebase.auth().onAuthStateChanged(firebaseUser =>{
-    if(firebaseUser){
-        console.log(firebaseUser);
-        if(firebaseUser.uid == 'mwr3iSPv7eOZb3FEaBwETVMU1Um1'){
-            window.location.href = "admin";
-        } else {
-            window.location.href = "gift";
-        }
-    } else {
-        console.log("not logged in");
-    }
-})
-}());
 
 var showedForgotBtn = false;
 function errors(errorMessage){

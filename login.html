@@ -1,28 +1,16 @@
 <html lang="en">
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130568140-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-130568140-1');
-    </script>
-
-
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Login</title>
-  <link rel="icon" href="/icon.png">
+  <link rel="icon" href="images/icon.png">
 
 <!-- CSS  -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
-	<script type="text/javascript" src="/mandrill.min.js"></script>
-  </head>
+</head>
 <body bgcolor="#f5f5f5">
       <div class="row">
         <div class="col s1 m2 l4"></div>
@@ -45,13 +33,23 @@
             </div>
             <div id="loginActions" class="card-action">
               <a id="btnLogin" class="waves-effect waves-light btn green">Login</a>
-			  <a href="signup.html" class="waves-effect waves-light btn grey lighten-1">Sign Up</a>
             </div>
           </div>
         </div>
         <div class="col s1 m2 l4"></div>
       </div>
   <script src="js/auth.js"></script>
+  <script>
+    firebase.auth().onAuthStateChanged(firebaseUser => {
+     if (firebaseUser) {
+       // User is signed in.
+       window.location.href = "index.html";
+     } else {
+       // User is signed out.
+       // window.location.href = "login.html";
+     }
+   });
+    </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
   <script src="https://giftamizer.com/js/announcement.js"></script>
   </body>

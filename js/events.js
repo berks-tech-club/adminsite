@@ -1,3 +1,4 @@
+/*
 var config = {
   apiKey: "AIzaSyDfiBzLoNU4t5q_hOdcFjg-RGKNFnZ5wxg",
   authDomain: "berks-technology-club-admin.firebaseapp.com",
@@ -7,10 +8,7 @@ var config = {
   messagingSenderId: "203643757535"
 };
 firebase.initializeApp(config);
-
-// https://www.lynda.com/React-Native-tutorials/React-Navigation-creating-navigator/645061/686606-4.html
-
-
+*/
 
 // global variable for referencing the database
 var db = firebase.firestore();

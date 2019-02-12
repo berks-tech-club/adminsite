@@ -10,13 +10,30 @@
       <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
       <link rel="icon" href="images/icon.png">
    </head>
+   <script>
+   firebase.auth().onAuthStateChanged(firebaseUser => {
+    if (firebaseUser) {
+      // User is signed in.
+      var displayName = user.displayName;
+      var email = user.email;
+      var emailVerified = user.emailVerified;
+      var photoURL = user.photoURL;
+      var isAnonymous = user.isAnonymous;
+      var uid = user.uid;
+      var providerData = user.providerData;
+    } else {
+      // User is signed out.
+      window.location.href = "login.html";
+    }
+  });
+   </script>
    <body class="white">
       <!-- Desktop Nav -->
       <nav class="pblue" role="navigation">
          <div class="nav-wrapper container">
             <img id="logo" src="images/icon-inverted.png">
             <ul class="desktop right hide-on-med-and-down">
-               <li><a href="#home">Home</a></li>
+               <li><a class="white-text" id="btnLogout">Sign Out</a></li>
             </ul>
          </div>
       </nav>
@@ -146,15 +163,14 @@
       </div>
       <!--  Scripts-->
       <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-auth.js"></script>
       <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-firestore.js"></script>
       <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-storage.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-auth.js"></script>
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-      <!-- <script src="js/auth.js"></script>-->
+      <script src="js/auth.js"></script>
       <script src="js/events.js"></script>
       <script src="js/center.js"></script>
       <script src="js/materialize.js"></script>
       <script src="js/init.js"></script>
-      <!-- <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script> -->
    </body>
 </html>
