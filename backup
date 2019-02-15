@@ -1,3 +1,27 @@
+  /*
+// firebase storage tutorial
+// https://medium.com/@mheavers/setting-up-a-basic-file-upload-feature-for-your-static-website-with-just-javascript-using-firebase-32464580d8bb
+// $('#deleteEventConfirmBtn').attr('onClick','deleteEventConfirm(\''+eventID+'\', \''+name+'\');');
+$('.file-select').attr('onChange', 'handleFileUploadChange()');
+function handleFileUploadChange() {
+  var e = document.getElementById('.file-select');
+  $('.file-submit').attr('onClick', 'handleFileUploadSubmit(\''+e+'\')');
+}
+function handleFileUploadSubmit(e) {
+  console.log('Attempting upload of ' + e);
+  const uploadTask = storageRef.child(`images/event/`+ e.name).put(e); //create a child directory called images, and place the file inside this directory
+  uploadTask.on('state_changed', (snapshot) => {
+  // Observe state change events such as progress, pause, and resume
+  }, (error) => {
+    // Handle unsuccessful uploads
+    console.log(error);
+  }, () => {
+     // Do something once upload is complete
+     console.log('success');
+  });
+}
+*/
+  
   db.collection("events")
     .get()
     .then(function (querySnapshot) {
