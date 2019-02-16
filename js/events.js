@@ -43,7 +43,7 @@ function addEvent() {
     //var desc =  symbolFix(document.getElementById('addEventDesc').value);
     var desc =  document.getElementById('addEventDesc').value;
     var iName = imageName;
-    var imageRef = storageRef.child('images\\events\\'+ imageName);
+    var imageRef = storageRef.child('images/events/'+ imageName);
     
     console.log(iName);
     db.collection("events").add({
@@ -83,7 +83,7 @@ var d = db.collection("events").doc(eventID);
 
 eventName = document.getElementById("editEventName").value;
 eventDesc = document.getElementById("editEventDesc").value;
-eventImageRef = storageRef.child('images\\events\\' + imageName);
+eventImageRef = storageRef.child('images/events/' + imageName);
 d.update({
     name: eventName,
     desc: eventDesc,
@@ -104,7 +104,7 @@ function deleteEvent(eventID, name, desc, iName) {
 
 // called by deleteEvent()
 function deleteEventConfirm(eventID, name, iName) {
-    var imageRef = storageRef.child('images\/events\/'+ imageName);
+    var imageRef = storageRef.child('images\/events\/'+ iName);
     // Delete the image
     imageRef.delete().then(function() {
         // File deleted successfully
@@ -129,23 +129,31 @@ function getEvents() {
         var name = change.doc.data().name;
         var desc = change.doc.data().desc;
         var imageName = change.doc.data().imageName;
-        var imageRef = storageRef.child('images\/events\/'+ imageName);
+        var imageUrl = '';
+        var imageRef = storageRef.child('images/events/'+ imageName);
+        imageRef.getDownloadURL().then(function(url) {
+            imageUrl = url;
+            console.log('booty');
+        });
         var eventID = change.doc.id;
+        console.log(imageName);
+        console.log(imageRef);
+        console.log(imageUrl);
         if (change.type == "added") {
           console.log('Event card added');
           // @TODO update this mobile version -----------------------------------------------------------
           document.getElementById('event_cards_mobile').innerHTML += '\
             <div class="card" id="mevent_'+eventID+'">\
                 <div class="card-image">\
-                  <img src='+imageRef+'>\
+                  <img src='+imageUrl+'>\
                   <span class="card-title">'+name+'</span>\
                 </div>\
                 <div class="card-content">\
                   <p>'+desc+'</p>\
                 </div>\
                 <div class="card-action">\
-                <a class="red-text" onclick="deleteEvent(\''+eventID+'\', \''+name+'\', \''+desc+'\');">Delete</a>\
-                <a class="green-text" onclick="editEvent(\''+eventID+'\', \''+name+'\', \''+desc+'\', \''+imageRef+'\');">Edit</a>\
+                <a class="red-text" onclick="deleteEvent(\''+eventID+'\', \''+name+'\', \''+desc+'\', \''+imageName+'\');">Delete</a>\
+                <a class="green-text" onclick="editEvent(\''+eventID+'\', \''+name+'\', \''+desc+'\', \''+imageName+'\');">Edit</a>\
                 </div>\
               </div>\
           ';
@@ -153,7 +161,7 @@ function getEvents() {
             document.getElementById('event_cards_desktop').innerHTML += '\
             <div class="card medium horizontal pwhite" id="devent_'+eventID+'">\
               <div class="card-image">\
-                <img src="'+imageRef+'">\
+                <img src="'+imageUrl+'">\
               </div>\
               <div class="card-stacked">\
                 <div class="card-content">\
@@ -161,8 +169,8 @@ function getEvents() {
                     <p>'+desc+'</p>\
                 </div>\
                 <div class="card-action blue-text">\
-                <a class="red-text" onclick="deleteEvent(\''+eventID+'\', \''+name+'\', \''+desc+'\');">Delete</a>\
-                <a class="green-text" onclick="editEvent(\''+eventID+'\', \''+name+'\', \''+desc+'\', \''+imageRef+'\');">Edit</a>\
+                <a class="red-text" onclick="deleteEvent(\''+eventID+'\', \''+name+'\', \''+desc+'\', \''+imageName+'\');">Delete</a>\
+                <a class="green-text" onclick="editEvent(\''+eventID+'\', \''+name+'\', \''+desc+'\', \''+imageName+'\');">Edit</a>\
               </div>\
               </div>\
           </div>\
@@ -174,7 +182,7 @@ function getEvents() {
           document.getElementById('devent_'+eventID).innerHTML = '\
           <div class="card medium horizontal pwhite" id="devent_'+eventID+'">\
             <div class="card-image">\
-              <img src="'+imageRef+'">\
+              <img src="'+imageUrl+'">\
             </div>\
             <div class="card-stacked">\
               <div class="card-content">\
@@ -182,8 +190,8 @@ function getEvents() {
                   <p>'+desc+'</p>\
               </div>\
               <div class="card-action blue-text">\
-              <a class="red-text" onclick="deleteEvent(\''+eventID+'\', \''+name+'\', \''+desc+'\');">Delete</a>\
-              <a class="green-text" onclick="editEvent(\''+eventID+'\', \''+name+'\', \''+desc+'\', \''+imageRef+'\');">Edit</a>\
+              <a class="red-text" onclick="deleteEvent(\''+eventID+'\', \''+name+'\', \''+desc+'\', \''+imageName+'\');">Delete</a>\
+              <a class="green-text" onclick="editEvent(\''+eventID+'\', \''+name+'\', \''+desc+'\', \''+imageName+'\');">Edit</a>\
             </div>\
             </div>\
         </div>\
