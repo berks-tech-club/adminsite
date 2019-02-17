@@ -13,11 +13,12 @@ var config = {
 
 // image upload handler
 // global image name var
-var imageName = '';
+var imageName;
+var image;
 document.querySelector('.file-select').addEventListener('change', handleFileUploadChange);
-document.querySelector('.file-submit').addEventListener('click', handleFileUploadSubmit);
+//document.querySelector('.file-submit').addEventListener('click', handleFileUploadSubmit);
 
-let selectedFile;
+var selectedFile;
 function handleFileUploadChange(e) {
   selectedFile = e.target.files[0];
   imageName = selectedFile.name;
@@ -42,8 +43,8 @@ function addEvent() {
     var name =  document.getElementById('addEventName').value;
     //var desc =  symbolFix(document.getElementById('addEventDesc').value);
     var desc =  document.getElementById('addEventDesc').value;
-    var iName = imageName;
-    var imageRef = storageRef.child('images/events/'+ imageName);
+    var iName = selectedFile.name;
+    //var imageRef = storageRef.child('images/events/'+ imageName);
     
     console.log(iName);
     db.collection("events").add({
@@ -53,6 +54,9 @@ function addEvent() {
     })
     .then(function(docRef) {
       console.log("Document written with ID: ", docRef.id);
+      if (imageName =! null) {
+        storageRef.child('images/events/' + selectedFile.name).put(selectedFile);
+      }
     })
     .catch(function(error) {
         console.error("Error adding document: ", error);
@@ -60,7 +64,7 @@ function addEvent() {
     M.toast({html: name+' was added.'}, 4000);
     document.getElementById("addEventName").value = "";
     document.getElementById("addEventDesc").value = "";
-    $('#addItem').modal('close');
+    $('#addItem').modal('close'); // fix this --------------------------------------------------------------
     $('.tooltipped').tooltip({delay: 50});
 }
 
@@ -122,6 +126,12 @@ function deleteEventConfirm(eventID, name, iName) {
 	$('.tooltipped').tooltip({delay: 50});
 }
 
+function returnUrl(imageRef) {
+  imageRef.getDownloadURL().then(function(url) {
+    console.log(url);
+    return url + '?alt=media&token=31b832ca-6acd-40e2-99df-ef0e495846f5';
+  });
+}
 // add a card for each event in the db
 function getEvents() {
     db.collection('events').onSnapshot(function(snapshot) {
@@ -129,12 +139,8 @@ function getEvents() {
         var name = change.doc.data().name;
         var desc = change.doc.data().desc;
         var imageName = change.doc.data().imageName;
-        var imageUrl = '';
         var imageRef = storageRef.child('images/events/'+ imageName);
-        imageRef.getDownloadURL().then(function(url) {
-            imageUrl = url;
-            console.log('booty');
-        });
+        var imageUrl = imageRef.getDownloadURL + '?alt=media&token=31b832ca-6acd-40e2-99df-ef0e495846f5';
         var eventID = change.doc.id;
         console.log(imageName);
         console.log(imageRef);
