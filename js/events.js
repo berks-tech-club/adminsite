@@ -39,33 +39,46 @@ function handleFileUploadSubmit(e) {
 
 // add an event to the database
 function addEvent() {
-    //var name =  symbolFix(document.getElementById('addEventName').value);
-    var name =  document.getElementById('addEventName').value;
-    //var desc =  symbolFix(document.getElementById('addEventDesc').value);
-    var desc =  document.getElementById('addEventDesc').value;
-    var iName = selectedFile.name;
-    //var imageRef = storageRef.child('images/events/'+ imageName);
-    
-    console.log(iName);
-    db.collection("events").add({
-      name: name,
-      desc: desc,
-      imageName: imageName
-    })
-    .then(function(docRef) {
-      console.log("Document written with ID: ", docRef.id);
-      if (imageName =! null) {
-        storageRef.child('images/events/' + selectedFile.name).put(selectedFile);
-      }
-    })
-    .catch(function(error) {
-        console.error("Error adding document: ", error);
-    });
-    M.toast({html: name+' was added.'}, 4000);
-    document.getElementById("addEventName").value = "";
-    document.getElementById("addEventDesc").value = "";
-    $('#addItem').modal('close'); // fix this --------------------------------------------------------------
-    $('.tooltipped').tooltip({delay: 50});
+  //var name =  symbolFix(document.getElementById('addEventName').value);
+  var name =  document.getElementById('addEventName').value;
+  //var desc =  symbolFix(document.getElementById('addEventDesc').value);
+  var desc =  document.getElementById('addEventDesc').value;
+  var imageName = selectedFile.name;
+  var imageUrl;
+  while(true) {
+    if (imageName =! null) {
+      const uploadTask = storageRef.child('images/events/' + selectedFile.name).put(selectedFile);
+      uploadTask.on('state_changed', (snapshot) => {
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+      }, function(error) {
+        console.log(error);
+      }, function() {
+        console.log('Getting download url');
+        imageUrl = uploadTask.snapshot.ref.getDownloadURL().then(function(uploadUrl) {
+        console.log(uploadUrl);
+
+        console.log('Pushing to database.');
+        db.collection("events").add({
+          name: name,
+          desc: desc,
+          imageName: imageName,
+          imageUrl: uploadUrl
+        });
+        });
+      });
+      break;
+    }
+    else {
+      M.toast({html: 'Please upload an image.'}, 4000);
+    }
+}
+  //var imageRef = storageRef.child('images/events/'+ imageName);
+  M.toast({html: name+' was added.'}, 4000);
+  document.getElementById("addEventName").value = "";
+  document.getElementById("addEventDesc").value = "";
+  $('#addItem').modal('close'); // fix this --------------------------------------------------------------
+  $('.tooltipped').tooltip({delay: 50});
 }
 
 // edit an event in the database
@@ -87,12 +100,35 @@ var d = db.collection("events").doc(eventID);
 
 eventName = document.getElementById("editEventName").value;
 eventDesc = document.getElementById("editEventDesc").value;
-eventImageRef = storageRef.child('images/events/' + imageName);
-d.update({
-    name: eventName,
-    desc: eventDesc,
-    imageName: imageName
-});
+
+while(true) {
+  if (imageName =! null) {
+    const uploadTask = storageRef.child('images/events/' + selectedFile.name).put(selectedFile);
+    uploadTask.on('state_changed', (snapshot) => {
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+    }, function(error) {
+      console.log(error);
+    }, function() {
+      console.log('Getting download url');
+      imageUrl = uploadTask.snapshot.ref.getDownloadURL().then(function(uploadUrl) {
+      console.log(uploadUrl);
+
+      console.log('Pushing to database.');
+      d.update({
+        name: eventName,
+        desc: eventDesc,
+        imageName: imageName,
+        imageUrl: uploadUrl
+      });
+      });
+    });
+    break;
+  }
+  else {
+    M.toast({html: 'Please upload an image.'}, 4000);
+  }
+}
 
 M.toast({html: eventName+' was changed.'}, 4000);
 }
@@ -139,12 +175,8 @@ function getEvents() {
         var name = change.doc.data().name;
         var desc = change.doc.data().desc;
         var imageName = change.doc.data().imageName;
-        var imageRef = storageRef.child('images/events/'+ imageName);
-        var imageUrl = imageRef.getDownloadURL + '?alt=media&token=31b832ca-6acd-40e2-99df-ef0e495846f5';
+        var imageUrl = change.doc.data().imageUrl;
         var eventID = change.doc.id;
-        console.log(imageName);
-        console.log(imageRef);
-        console.log(imageUrl);
         if (change.type == "added") {
           console.log('Event card added');
           // @TODO update this mobile version -----------------------------------------------------------
